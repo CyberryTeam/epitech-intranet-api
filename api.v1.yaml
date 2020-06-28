@@ -702,7 +702,6 @@ paths:
           format: email
         name: user
         in: path
-        allowEmptyValue: false
         required: true
   '/user/{user}/binome':
     parameters:
