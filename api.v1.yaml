@@ -1,0 +1,653 @@
+openapi: 3.0.0
+info:
+  title: Epitech Intranet API
+  version: '1.0'
+  description: Epitech Intranet operations
+servers:
+  - url: 'https://intra.epitech.eu'
+    description: Epitech Intranet URL
+components:
+  securitySchemes:
+    Microsoft:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+          tokenUrl: 'https://login.microsoftonline.com/common/oauth2/token'
+          scopes: {}
+      description: ''
+security:
+  - Microsoft: []
+tags:
+  - name: activity
+  - name: module
+  - name: planning
+  - name: user
+paths:
+  '/module/{year}/{module}/{city}/{activity}':
+    parameters:
+      - schema:
+          type: string
+        name: year
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: module
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: city
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: activity
+        in: path
+        required: true
+    get:
+      summary: Activity
+      operationId: get-module-year-module-city-activity
+      parameters:
+        - schema:
+            type: string
+            default: json
+          in: query
+          description: ''
+          name: format
+          required: true
+          allowReserved: false
+      description: Activity information
+      responses:
+        '200':
+          description: OK
+      tags:
+        - activity
+  '/module/{year}/{module}/{city}/{activity}/project':
+    parameters:
+      - schema:
+          type: string
+        name: year
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: module
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: city
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: activity
+        in: path
+        required: true
+    get:
+      summary: Activity project
+      tags:
+        - activity
+      operationId: get-module-year-module-city-activity-project
+      parameters:
+        - schema:
+            type: string
+            default: json
+          in: query
+          name: format
+          required: true
+      responses:
+        '200':
+          description: OK
+      description: Activity project information
+  '/module/{year}/{module}/{city}/{activity}/project/file':
+    parameters:
+      - schema:
+          type: string
+        name: year
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: module
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: city
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: activity
+        in: path
+        required: true
+    get:
+      summary: Activity project file list
+      tags:
+        - activity
+      operationId: get-module-year-module-city-activity-project-file
+      parameters:
+        - schema:
+            type: string
+            default: json
+          in: query
+          name: format
+          required: true
+      responses:
+        '200':
+          description: OK
+      description: List of files of the activity project
+  '/module/{year}/{module}/{city}':
+    parameters:
+      - schema:
+          type: string
+        name: year
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: module
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: city
+        in: path
+        required: true
+    get:
+      summary: Module
+      tags:
+        - module
+      responses:
+        '200':
+          description: OK
+      operationId: get-module-year-module-city
+      parameters:
+        - schema:
+            type: string
+            default: json
+          in: query
+          name: format
+          required: true
+      description: Module information
+  /planning/load:
+    get:
+      summary: Planning
+      tags:
+        - planning
+      responses:
+        '200':
+          description: OK
+      operationId: get-planning-load
+      parameters:
+        - schema:
+            type: string
+            default: json
+          in: query
+          name: format
+          required: true
+        - schema:
+            type: string
+            format: date
+          in: query
+          name: start
+        - schema:
+            type: string
+            format: date
+          in: query
+          name: end
+      description: List of planned activities by start date and end date
+    parameters: []
+  /planning/my-schedules:
+    get:
+      summary: Personal planning
+      tags:
+        - planning
+      responses:
+        '200':
+          description: OK
+      operationId: get-planning-my-schedules
+      parameters:
+        - schema:
+            type: string
+            default: json
+          in: query
+          name: format
+          required: true
+        - schema:
+            type: string
+            format: date
+          in: query
+          name: start
+        - schema:
+            type: string
+            format: date
+          in: query
+          name: end
+          description: ''
+      description: List of planned personal activities by start date and end date
+    parameters: []
+  '/user/{user}':
+    get:
+      summary: User
+      tags:
+        - user
+      responses:
+        '200':
+          description: OK
+      operationId: get-user-user
+      parameters:
+        - schema:
+            type: string
+            default: json
+          in: query
+          name: format
+          required: true
+      description: User information
+    parameters:
+      - schema:
+          type: string
+          format: email
+        name: user
+        in: path
+        allowEmptyValue: false
+        required: true
+  '/user/{user}/netsoul':
+    parameters:
+      - schema:
+          type: string
+          format: email
+        name: user
+        in: path
+        required: true
+    get:
+      summary: User netsoul
+      tags:
+        - user
+      responses:
+        '200':
+          description: OK
+      operationId: get-user-user-netsoul
+      parameters:
+        - schema:
+            type: string
+            default: json
+          in: query
+          name: format
+          required: true
+      description: User netsoul
+  '/user/{user}/binome':
+    parameters:
+      - schema:
+          type: string
+          format: email
+        name: user
+        in: path
+        required: true
+    get:
+      summary: User pairs
+      tags:
+        - user
+      responses:
+        '200':
+          description: OK
+      operationId: get-user-user-binome
+      parameters:
+        - schema:
+            type: string
+            default: json
+          in: query
+          name: format
+          required: true
+      description: List of user pairs
+  '/user/{user}/notification/{type}':
+    parameters:
+      - schema:
+          type: string
+          format: email
+        name: user
+        in: path
+        required: true
+      - schema:
+          type: string
+          enum:
+            - alert
+            - coming
+            - missed
+            - message
+        name: type
+        in: path
+        required: true
+    get:
+      summary: User notifications
+      tags:
+        - user
+      responses:
+        '200':
+          description: OK
+      operationId: get-user-user-notification-type
+      parameters:
+        - schema:
+            type: string
+            default: json
+          in: query
+          name: format
+          required: true
+      description: List of user notifications by type
+  '/user/{user}/flags':
+    parameters:
+      - schema:
+          type: string
+          format: email
+        name: user
+        in: path
+        required: true
+    get:
+      summary: User flags
+      tags:
+        - user
+      responses:
+        '200':
+          description: OK
+      operationId: get-user-user-flags
+      parameters:
+        - schema:
+            type: string
+            default: json
+          in: query
+          name: format
+          required: true
+      description: List of user flags
+  '/user/{user}/marks':
+    parameters:
+      - schema:
+          type: string
+          format: email
+        name: user
+        in: path
+        required: true
+    get:
+      summary: User marks
+      tags:
+        - user
+      responses:
+        '200':
+          description: OK
+      operationId: get-user-user-marks
+      parameters:
+        - schema:
+            type: string
+            default: json
+          in: query
+          name: format
+          required: true
+      description: List of user marks
+  /:
+    get:
+      summary: Dashboard
+      responses:
+        '200':
+          description: OK
+      operationId: get
+      parameters:
+        - schema:
+            type: string
+            default: json
+          in: query
+          name: format
+          required: true
+      description: Dashboard information
+    parameters: []
+  /file:
+    get:
+      summary: File list
+      tags: []
+      responses:
+        '200':
+          description: OK
+      operationId: get-file
+      parameters:
+        - schema:
+            type: string
+            default: json
+          in: query
+          name: format
+          required: true
+      description: List of files
+  /module/board:
+    get:
+      summary: Acitivity list
+      tags:
+        - activity
+      responses:
+        '200':
+          description: OK
+      operationId: get-module-board
+      parameters:
+        - schema:
+            type: string
+            default: json
+          in: query
+          name: format
+          required: true
+        - schema:
+            type: string
+            format: date
+          in: query
+          name: start
+          required: true
+        - schema:
+            type: string
+            format: date
+          in: query
+          name: end
+          required: true
+      description: List of activities by start date and end date
+    parameters: []
+  /filter:
+    get:
+      summary: Module list
+      tags:
+        - module
+      responses:
+        '200':
+          description: OK
+      operationId: get-filter
+      parameters:
+        - schema:
+            type: string
+            default: json
+          in: query
+          name: format
+          required: true
+        - schema:
+            type: array
+          in: query
+          name: scolaryear
+          required: true
+        - schema:
+            type: array
+          in: query
+          name: location
+          required: true
+        - schema:
+            type: array
+          in: query
+          name: course
+          required: true
+      description: 'List of modules filtered by school year, location and course type'
+    parameters: []
+  '/module/{year}/{module}/{city}/registered':
+    parameters:
+      - schema:
+          type: string
+        name: year
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: module
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: city
+        in: path
+        required: true
+    get:
+      summary: Module registered
+      tags:
+        - module
+      responses:
+        '200':
+          description: OK
+      operationId: get-module-year-module-city-registered
+      parameters:
+        - schema:
+            type: string
+            default: json
+          in: query
+          name: format
+          required: true
+      description: List of students registered to the module
+  '/module/{year}/{module}/{city}/{activity}/project/registered':
+    parameters:
+      - schema:
+          type: string
+        name: year
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: module
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: city
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: activity
+        in: path
+        required: true
+    get:
+      summary: Activity registered
+      tags:
+        - activity
+      responses:
+        '200':
+          description: OK
+      operationId: get-module-year-module-city-activity-project-registered
+      parameters:
+        - schema:
+            type: string
+            default: json
+          in: query
+          name: format
+          required: true
+      description: List of students registered to the activity
+  '/module/{year}/{module}/{city}/{activity}/note':
+    parameters:
+      - schema:
+          type: string
+        name: year
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: module
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: city
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: activity
+        in: path
+        required: true
+    get:
+      summary: Activity mark
+      tags:
+        - activity
+      responses:
+        '200':
+          description: OK
+      operationId: get-module-year-module-city-activity-note
+      parameters:
+        - schema:
+            type: string
+            default: json
+          in: query
+          name: format
+          required: true
+      description: Mark obtained for the activity
+  '/module/{year}/{module}/{city}/{activity}/rdv':
+    parameters:
+      - schema:
+          type: string
+        name: year
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: module
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: city
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: activity
+        in: path
+        required: true
+    get:
+      summary: Activity appointments
+      tags:
+        - activity
+      responses:
+        '200':
+          description: OK
+      operationId: get-module-year-module-city-activity-rdv
+      parameters:
+        - schema:
+            type: string
+            default: json
+          in: query
+          name: format
+          required: true
+      description: Appointments related to the activity
+  '/user/{user}/print':
+    parameters:
+      - schema:
+          type: string
+          format: email
+        name: user
+        in: path
+        required: true
+    get:
+      summary: User complete
+      tags:
+        - user
+      responses:
+        '200':
+          description: OK
+      operationId: get-user-user-print
+      parameters:
+        - schema:
+            type: string
+            default: json
+          in: query
+          name: format
+          required: true
+      description: User complete information
