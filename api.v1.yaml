@@ -864,7 +864,6 @@ paths:
           name: format
           required: true
       description: User complete information
-
   /:
     get:
       summary: Dashboard
@@ -883,6 +882,13 @@ paths:
       description: Dashboard information
     parameters: []
   '/file/{directory}':
+    parameters:
+      - schema:
+          type: string
+        name: directory
+        in: path
+        required: true
+        allowEmptyValue: true
     get:
       summary: File list
       tags: []
@@ -899,8 +905,3 @@ paths:
           name: format
           required: true
       description: List of files
-    parameters:
-      - schema:
-          type: string
-        name: directory
-        in: path
