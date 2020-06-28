@@ -52,7 +52,8 @@ paths:
       parameters:
         - schema:
             type: string
-            default: json
+            enum:
+              - json
           in: query
           description: ''
           name: format
@@ -94,7 +95,8 @@ paths:
       parameters:
         - schema:
             type: string
-            default: json
+            enum:
+              - json
           in: query
           name: format
           required: true
@@ -132,7 +134,8 @@ paths:
       parameters:
         - schema:
             type: string
-            default: json
+            enum:
+              - json
           in: query
           name: format
           required: true
@@ -168,7 +171,8 @@ paths:
       parameters:
         - schema:
             type: string
-            default: json
+            enum:
+              - json
           in: query
           name: format
           required: true
@@ -185,7 +189,8 @@ paths:
       parameters:
         - schema:
             type: string
-            default: json
+            enum:
+              - json
           in: query
           name: format
           required: true
@@ -213,7 +218,8 @@ paths:
       parameters:
         - schema:
             type: string
-            default: json
+            enum:
+              - json
           in: query
           name: format
           required: true
@@ -242,7 +248,8 @@ paths:
       parameters:
         - schema:
             type: string
-            default: json
+            enum:
+              - json
           in: query
           name: format
           required: true
@@ -274,7 +281,8 @@ paths:
       parameters:
         - schema:
             type: string
-            default: json
+            enum:
+              - json
           in: query
           name: format
           required: true
@@ -298,7 +306,8 @@ paths:
       parameters:
         - schema:
             type: string
-            default: json
+            enum:
+              - json
           in: query
           name: format
           required: true
@@ -332,7 +341,8 @@ paths:
       parameters:
         - schema:
             type: string
-            default: json
+            enum:
+              - json
           in: query
           name: format
           required: true
@@ -356,7 +366,8 @@ paths:
       parameters:
         - schema:
             type: string
-            default: json
+            enum:
+              - json
           in: query
           name: format
           required: true
@@ -380,7 +391,8 @@ paths:
       parameters:
         - schema:
             type: string
-            default: json
+            enum:
+              - json
           in: query
           name: format
           required: true
@@ -395,13 +407,14 @@ paths:
       parameters:
         - schema:
             type: string
-            default: json
+            enum:
+              - json
           in: query
           name: format
           required: true
       description: Dashboard information
     parameters: []
-  /file:
+  '/file/{directory}':
     get:
       summary: File list
       tags: []
@@ -412,11 +425,17 @@ paths:
       parameters:
         - schema:
             type: string
-            default: json
+            enum:
+              - json
           in: query
           name: format
           required: true
       description: List of files
+    parameters:
+      - schema:
+          type: string
+        name: directory
+        in: path
   /module/board:
     get:
       summary: Acitivity list
@@ -429,7 +448,8 @@ paths:
       parameters:
         - schema:
             type: string
-            default: json
+            enum:
+              - json
           in: query
           name: format
           required: true
@@ -459,7 +479,8 @@ paths:
       parameters:
         - schema:
             type: string
-            default: json
+            enum:
+              - json
           in: query
           name: format
           required: true
@@ -508,7 +529,8 @@ paths:
       parameters:
         - schema:
             type: string
-            default: json
+            enum:
+              - json
           in: query
           name: format
           required: true
@@ -546,7 +568,8 @@ paths:
       parameters:
         - schema:
             type: string
-            default: json
+            enum:
+              - json
           in: query
           name: format
           required: true
@@ -584,7 +607,8 @@ paths:
       parameters:
         - schema:
             type: string
-            default: json
+            enum:
+              - json
           in: query
           name: format
           required: true
@@ -622,7 +646,8 @@ paths:
       parameters:
         - schema:
             type: string
-            default: json
+            enum:
+              - json
           in: query
           name: format
           required: true
@@ -646,8 +671,235 @@ paths:
       parameters:
         - schema:
             type: string
-            default: json
+            enum:
+              - json
           in: query
           name: format
           required: true
       description: User complete information
+  '/module/{year}/{city}/{activity}/project/confirmleavegroup':
+    parameters:
+      - schema:
+          type: string
+        name: year
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: city
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: activity
+        in: path
+        required: true
+    post:
+      summary: Activity project group leave
+      operationId: post-module-year-city-activity-project-confirmleavegroup
+      responses:
+        '200':
+          description: OK
+      parameters:
+        - schema:
+            type: string
+            enum:
+              - json
+          in: query
+          name: format
+          required: true
+      description: Leave an activity project group
+      tags:
+        - activity
+  '/module/{year}/{city}/{activity}/project/confirmjoingroup':
+    parameters:
+      - schema:
+          type: string
+        name: year
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: city
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: activity
+        in: path
+        required: true
+    post:
+      summary: Activity project group accept
+      operationId: post-module-year-city-activity-project-confirmjoingroup
+      responses:
+        '200':
+          description: OK
+      description: Accept an activity project group request
+      tags:
+        - activity
+      parameters:
+        - schema:
+            type: string
+            enum:
+              - json
+          in: query
+          name: format
+          required: true
+  '/module/{year}/{city}/{activity}/project/declinejoingroup':
+    parameters:
+      - schema:
+          type: string
+        name: year
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: city
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: activity
+        in: path
+        required: true
+    post:
+      summary: Activity project group decline
+      operationId: post-module-year-city-activity-project-declinejoingroup
+      responses:
+        '200':
+          description: OK
+      description: Decline an activity project group request
+      tags:
+        - activity
+      parameters:
+        - schema:
+            type: string
+            enum:
+              - json
+          in: query
+          name: format
+          required: true
+  '/module/{year}/{city}/{activity}/project/register':
+    parameters:
+      - schema:
+          type: string
+        name: year
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: city
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: activity
+        in: path
+        required: true
+    post:
+      summary: Activity project register
+      operationId: post-module-year-city-activity-project-register
+      responses:
+        '200':
+          description: OK
+      description: Register to an activity project
+      tags:
+        - activity
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                members:
+                  type: array
+                  items:
+                    type: string
+                    format: email
+        description: ''
+      parameters:
+        - schema:
+            type: string
+            enum:
+              - json
+          in: query
+          name: format
+          required: true
+  '/module/{year}/{city}/{activity}/project/unregister':
+    parameters:
+      - schema:
+          type: string
+        name: year
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: city
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: activity
+        in: path
+        required: true
+    post:
+      summary: Activity project unregister
+      operationId: post-module-year-city-activity-project-unregister
+      responses:
+        '200':
+          description: OK
+      description: Unregister from an activity project
+      tags:
+        - activity
+      parameters:
+        - schema:
+            type: string
+            enum:
+              - json
+          in: query
+          name: format
+          required: true
+  '/module/{year}/{city}/{activity}/project/destroygroup':
+    parameters:
+      - schema:
+          type: string
+        name: year
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: city
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: activity
+        in: path
+        required: true
+    post:
+      summary: Activity project group destroy
+      operationId: post-module-year-city-activity-project-destroygroup
+      responses:
+        '200':
+          description: OK
+      description: Destroy group of an activity project
+      tags:
+        - activity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+      parameters:
+        - schema:
+            type: string
+            enum:
+              - json
+          in: query
+          name: format
+          required: true
