@@ -4,7 +4,7 @@ info:
   version: '1.0'
   description: Epitech Intranet operations
 servers:
-  - url: 'https://intra.epitech.eu'
+  - url: 'https://intra.epitech.eu/auth-9b270b78c167c22c49e444c75ddeb3fc6623cd23'
     description: Epitech Intranet URL
 components:
   securitySchemes:
@@ -435,7 +435,7 @@ paths:
           in: query
           name: format
           required: true
-  '/module/{year}/{city}/{activity}/project/register':
+  '/module/{year}/{module}/{city}/{activity}/project/register':
     parameters:
       - schema:
           type: string
@@ -452,12 +452,24 @@ paths:
         name: activity
         in: path
         required: true
+      - schema:
+          type: string
+        name: module
+        in: path
+        required: true
     post:
       summary: Activity project register
       operationId: post-module-year-city-activity-project-register
       responses:
         '200':
           description: OK
+          headers: {}
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       description: Register to an activity project
       tags:
         - activity
@@ -474,6 +486,11 @@ paths:
                   items:
                     type: string
                     format: email
+                force:
+                  type: boolean
+                codegroup:
+                  type: string
+            examples: {}
         description: ''
       parameters:
         - schema:
