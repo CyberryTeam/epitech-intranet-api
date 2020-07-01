@@ -32,5 +32,5 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md) for more information.
 
 ## License
 
-Distributed under the [MIT License](https://spdx.org/licenses/MIT.html) License.
+Distributed under the [MIT](https://spdx.org/licenses/MIT.html) License.
 See [`LICENSE`](LICENSE) for more information.
