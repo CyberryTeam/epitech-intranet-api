@@ -4,7 +4,7 @@ info:
   version: '1.0'
   description: Epitech Intranet operations
 servers:
-  - url: 'https://intra.epitech.eu/auth-9b270b78c167c22c49e444c75ddeb3fc6623cd23'
+  - url: 'https://intra.epitech.eu'
     description: Epitech Intranet URL
 components:
   securitySchemes:
