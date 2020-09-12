@@ -17,7 +17,6 @@ components:
         authorizationCode:
           authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
           tokenUrl: 'https://login.microsoftonline.com/common/oauth2/token'
-      description: ''
 security:
   - Microsoft: [ ]
 tags:
@@ -552,7 +551,6 @@ paths:
                   type: boolean
                 codegroup:
                   type: string
-        description: ''
       parameters:
         - schema:
             type: string
@@ -792,7 +790,6 @@ paths:
             format: date
           in: query
           name: end
-          description: ''
       description: List of planned personal activities by start date and end date
   '/user/{user}':
     get:
