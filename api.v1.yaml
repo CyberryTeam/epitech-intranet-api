@@ -3,6 +3,9 @@ info:
   title: Epitech Intranet API
   version: '1.0'
   description: Epitech Intranet operations
+  contact:
+    name: Cyberry Team
+    email: team@cyberry.fr
 servers:
   - url: 'https://intra.epitech.eu'
     description: Epitech Intranet URL
@@ -14,15 +17,15 @@ components:
         authorizationCode:
           authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
           tokenUrl: 'https://login.microsoftonline.com/common/oauth2/token'
-          scopes: {}
-      description: ''
 security:
-  - Microsoft: []
+  - Microsoft: [ ]
 tags:
   - name: activity
   - name: module
   - name: planning
   - name: user
+  - name: global
+  - name: file
 paths:
   '/module/{year}/{module}/{city}/{activity}':
     parameters:
@@ -55,7 +58,7 @@ paths:
             enum:
               - json
           in: query
-          description: ''
+          description: Response format
           name: format
           required: true
           allowReserved: false
@@ -63,6 +66,10 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
       tags:
         - activity
   '/module/{year}/{module}/{city}/{activity}/note':
@@ -94,6 +101,10 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
       operationId: get-module-year-module-city-activity-note
       parameters:
         - schema:
@@ -103,6 +114,7 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
       description: Mark obtained for the activity
   '/module/{year}/{module}/{city}/{activity}/project':
     parameters:
@@ -139,9 +151,14 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
       description: Activity project information
   '/module/{year}/{module}/{city}/{activity}/project/file':
     parameters:
@@ -178,9 +195,14 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
       description: List of files of the activity project
   '/module/{year}/{module}/{city}/{activity}/project/registered':
     parameters:
@@ -211,6 +233,10 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
       operationId: get-module-year-module-city-activity-project-registered
       parameters:
         - schema:
@@ -220,6 +246,7 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
       description: List of students registered to the activity
   '/module/{year}/{module}/{city}/{activity}/rdv':
     parameters:
@@ -250,6 +277,10 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
       operationId: get-module-year-module-city-activity-rdv
       parameters:
         - schema:
@@ -259,6 +290,7 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
       description: Appointments related to the activity
   /module/board:
     get:
@@ -268,6 +300,8 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
       operationId: get-module-board
       parameters:
         - schema:
@@ -277,6 +311,7 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
         - schema:
             type: string
             format: date
@@ -290,7 +325,6 @@ paths:
           name: end
           required: true
       description: List of activities by start date and end date
-    parameters: []
   '/module/{year}/{city}/{activity}/project/confirmjoingroup':
     parameters:
       - schema:
@@ -314,6 +348,12 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       description: Accept an activity project group request
       tags:
         - activity
@@ -325,6 +365,7 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
   '/module/{year}/{city}/{activity}/project/confirmleavegroup':
     parameters:
       - schema:
@@ -348,6 +389,12 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       parameters:
         - schema:
             type: string
@@ -356,6 +403,7 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
       description: Leave an activity project group
       tags:
         - activity
@@ -382,6 +430,12 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       description: Decline an activity project group request
       tags:
         - activity
@@ -393,6 +447,7 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
   '/module/{year}/{city}/{activity}/project/destroygroup':
     parameters:
       - schema:
@@ -416,12 +471,18 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       description: Destroy group of an activity project
       tags:
         - activity
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
               type: object
               properties:
@@ -435,7 +496,8 @@ paths:
           in: query
           name: format
           required: true
-  '/module/{year}/{city}/{activity}/project/register':
+          description: Response format
+  '/module/{year}/{module}/{city}/{activity}/project/register':
     parameters:
       - schema:
           type: string
@@ -452,12 +514,23 @@ paths:
         name: activity
         in: path
         required: true
+      - schema:
+          type: string
+        name: module
+        in: path
+        required: true
     post:
       summary: Activity project register
       operationId: post-module-year-city-activity-project-register
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       description: Register to an activity project
       tags:
         - activity
@@ -474,7 +547,10 @@ paths:
                   items:
                     type: string
                     format: email
-        description: ''
+                force:
+                  type: boolean
+                codegroup:
+                  type: string
       parameters:
         - schema:
             type: string
@@ -483,6 +559,7 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
   '/module/{year}/{city}/{activity}/project/unregister':
     parameters:
       - schema:
@@ -506,6 +583,12 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       description: Unregister from an activity project
       tags:
         - activity
@@ -517,6 +600,7 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
   '/module/{year}/{module}/{city}':
     parameters:
       - schema:
@@ -541,6 +625,10 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
       operationId: get-module-year-module-city
       parameters:
         - schema:
@@ -550,6 +638,7 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
       description: Module information
   '/module/{year}/{module}/{city}/registered':
     parameters:
@@ -575,6 +664,10 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
       operationId: get-module-year-module-city-registered
       parameters:
         - schema:
@@ -584,6 +677,7 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
       description: List of students registered to the module
   /filter:
     get:
@@ -593,6 +687,8 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
       operationId: get-filter
       parameters:
         - schema:
@@ -602,23 +698,33 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
         - schema:
             type: array
+            items:
+              type: string
           in: query
           name: scolaryear
           required: true
         - schema:
             type: array
+            items:
+              type: string
           in: query
           name: location
           required: true
         - schema:
             type: array
+            items:
+              type: string
           in: query
           name: course
           required: true
+        - schema:
+            type: number
+          in: query
+          name: preload
       description: 'List of modules filtered by school year, location and course type'
-    parameters: []
   /planning/load:
     get:
       summary: Planning
@@ -627,6 +733,10 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
       operationId: get-planning-load
       parameters:
         - schema:
@@ -636,6 +746,7 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
         - schema:
             type: string
             format: date
@@ -647,7 +758,6 @@ paths:
           in: query
           name: end
       description: List of planned activities by start date and end date
-    parameters: []
   /planning/my-schedules:
     get:
       summary: Personal planning
@@ -656,6 +766,10 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
       operationId: get-planning-my-schedules
       parameters:
         - schema:
@@ -665,6 +779,7 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
         - schema:
             type: string
             format: date
@@ -675,9 +790,7 @@ paths:
             format: date
           in: query
           name: end
-          description: ''
       description: List of planned personal activities by start date and end date
-    parameters: []
   '/user/{user}':
     get:
       summary: User
@@ -686,6 +799,10 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
       operationId: get-user-user
       parameters:
         - schema:
@@ -695,6 +812,7 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
       description: User information
     parameters:
       - schema:
@@ -718,6 +836,10 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
       operationId: get-user-user-binome
       parameters:
         - schema:
@@ -727,6 +849,7 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
       description: List of user pairs
   '/user/{user}/flags':
     parameters:
@@ -743,6 +866,10 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
       operationId: get-user-user-flags
       parameters:
         - schema:
@@ -752,6 +879,7 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
       description: List of user flags
   '/user/{user}/marks':
     parameters:
@@ -768,6 +896,10 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
       operationId: get-user-user-marks
       parameters:
         - schema:
@@ -777,6 +909,7 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
       description: List of user marks
   '/user/{user}/netsoul':
     parameters:
@@ -793,6 +926,10 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
       operationId: get-user-user-netsoul
       parameters:
         - schema:
@@ -802,6 +939,7 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
       description: User netsoul
   '/user/{user}/notification/{type}':
     parameters:
@@ -828,6 +966,10 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
       operationId: get-user-user-notification-type
       parameters:
         - schema:
@@ -837,6 +979,7 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
       description: List of user notifications by type
   '/user/{user}/print':
     parameters:
@@ -853,6 +996,10 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
       operationId: get-user-user-print
       parameters:
         - schema:
@@ -862,6 +1009,7 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
       description: User complete information
   /:
     get:
@@ -869,6 +1017,8 @@ paths:
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
       operationId: get
       parameters:
         - schema:
@@ -878,8 +1028,10 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
       description: Dashboard information
-    parameters: []
+      tags:
+        - global
   '/file/{directory}':
     parameters:
       - schema:
@@ -890,10 +1042,15 @@ paths:
         allowEmptyValue: true
     get:
       summary: File list
-      tags: []
+      tags:
+        - file
       responses:
         '200':
           description: OK
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
       operationId: get-file
       parameters:
         - schema:
@@ -903,4 +1060,5 @@ paths:
           in: query
           name: format
           required: true
+          description: Response format
       description: List of files
