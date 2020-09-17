@@ -3,8 +3,9 @@ name: Pull Request
 on: [pull_request]
 
 jobs:
-  lint:
-    name: Lint
+
+  super-linter:
+    name: Super-Linter
     runs-on: ubuntu-latest
 
     steps:
