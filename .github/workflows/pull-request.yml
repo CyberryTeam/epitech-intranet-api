@@ -1,0 +1,20 @@
+name: Pull Request
+
+on: [pull_request]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Lint
+        uses: github/super-linter@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FILTER_REGEX_EXCLUDE: .*.github/.*
+          VALIDATE_ALL_CODEBASE: false
+          VALIDATE_MD: true
+          VALIDATE_OPENAPI: true
