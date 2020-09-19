@@ -12,7 +12,7 @@ Epitech Intranet API documentation
 
 ## About
 
-The purpose of this project is to document all possible operations with the API of Epitech's Intranet.
+This project document all possible operations with the API of the Epitech Intranet.
 
 ### Built with
 
@@ -23,14 +23,14 @@ The purpose of this project is to document all possible operations with the API 
 
 Use tools such as [Stoplight Studio](https://stoplight.io/studio/), [Insomnia Designer](https://insomnia.rest/products/designer/) or [Postman](https://www.postman.com/) to handle the API.
 
-Documentation is also available: <https://cyberryteam.github.io/epitech-intranet-api/>
+Documentation is also available at: <https://cyberryteam.github.io/epitech-intranet-api/>
 
 ## Contributing
 
 Bug reports, feature requests, other issues and pull requests are welcome.
-See [`CONTRIBUTING.md`](CONTRIBUTING.md) for more information.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
 
 ## License
 
 Distributed under the [MIT](https://spdx.org/licenses/MIT.html) License.
-See [`LICENSE`](LICENSE) for more information.
+See [LICENSE](LICENSE) for more information.

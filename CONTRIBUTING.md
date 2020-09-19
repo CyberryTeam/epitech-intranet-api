@@ -1,5 +1,10 @@
 # Contributing
 
-We have adopted general guidelines for all our projects.
+## Table of Contents
 
-[Read and apply them carefully.](https://github.com/CyberryTeam/contributing/blob/master/CONTRIBUTING.md)
+- [Guidelines](#guidelines)
+
+## Guidelines
+
+We have adopted general guidelines for all our projects.
+See [CyberryTeam/contributing](https://github.com/CyberryTeam/contributing) for more information.
